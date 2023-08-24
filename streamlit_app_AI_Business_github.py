@@ -7,6 +7,7 @@ from langchain import PromptTemplate
 import openai
 import pandas as pd
 from langchain.agents import create_pandas_dataframe_agent
+from langchain.agents.agent_types import AgentType
 
 
 #enter the api key here
