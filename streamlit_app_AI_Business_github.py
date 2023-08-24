@@ -309,14 +309,12 @@ def main_gpt_chat_generator():
   else:
 
         query = st.text_input("Enter a question to ask your file:") 
-        
-        llm = OpenAI(temperature=0.2, openai_api_key=openai_api_key)
-
         # Read Data as Pandas
         data = pd.read_csv(file)
 
         # Define pandas df agent - 0 ~ no creativity vs 1 ~ very creative
-        agent = create_pandas_dataframe_agent(llm,data,verbose=True)         
+        agent = create_pandas_dataframe_agent(OpenAI(temperature=0.1, openai_api_key=openai_api_key),data,verbose=True) 
+            
         # Define Generated and Past Chat Arrays
         if 'generated' not in st.session_state: 
             st.session_state['generated'] = []
