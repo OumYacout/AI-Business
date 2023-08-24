@@ -123,16 +123,6 @@ def generate_BusinessAdvisory(language, category, subject):
   return (response)
 
 
-def generate_chat(language, category, name, company, subject):
-  llm = OpenAI(model_name='gpt-3.5-turbo-16k',temperature=0.7, openai_api_key=openai_api_key)
-  # Prompt
-  template = 'Reply in {language} language , as a professional email marketer. You have a Creative tone of voice. your name is {name} and you are from {company} Write a not personalized {category} email promoting this product or service: {subject}.'
-  prompt = PromptTemplate(input_variables=["language","category","name","company", "subject"], template=template)
-  prompt_query = prompt.format(language=language, category= category, name=name, company= company, subject=subject)
-  # Run LLM model and print out response
-  response = llm(prompt_query)
-  return (response)
-
 
 def update_github_file(data):
 
@@ -307,6 +297,10 @@ def main_gpt_BusinessAdvisory_generator():
 
             
 def main_gpt_chat_generator():
+
+  openai.api_key = openai_api_key
+  if openai_api_key=="":
+                st.warning("You do not provide an API key. Please enter your openai key")
 
     # Upload File
     file =  st.file_uploader("Upload CSV file",type=["csv"])
