@@ -309,7 +309,7 @@ def main_gpt_chat_generator():
 
         query = st.text_input("Enter a question to ask your file:") 
         
-        llm = OpenAI(model_name='gpt-3.5-turbo-16k', temperature=0.2, openai_api_key=openai_api_key)
+        llm = OpenAI(temperature=0.2, openai_api_key=openai_api_key)
 
         # Read Data as Pandas
         data = pd.read_csv(file)
