@@ -267,7 +267,7 @@ def main_gpt_SocialMedia_generator():
 def main_gpt_BusinessAdvisory_generator():
 
 
-    st.subheader('\n What is your email is about ?\n')
+    st.subheader('\n Choose the business advisory you need \n')
 
     post_text = ""  # initialize columns variables
 
