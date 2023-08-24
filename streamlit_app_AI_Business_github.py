@@ -297,13 +297,14 @@ def main_gpt_BusinessAdvisory_generator():
 
             
 def main_gpt_chat_generator():
-  if openai_api_key=="":
-    st.warning("You do not provide an API key. Please enter your openai key")
+
 
     # Upload File
     file =  st.file_uploader("Upload CSV file",type=["csv"])
     if not file: st.stop()
 
+    if openai_api_key=="":
+    st.warning("You do not provide an API key. Please enter your openai key")
 
     # Accept input from user
     query = st.text_input("Enter a question to ask your file:") 
