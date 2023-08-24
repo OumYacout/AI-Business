@@ -306,61 +306,63 @@ def main_gpt_chat_generator():
     if openai_api_key=="":
       st.warning("You do not provide an API key. Please enter your openai key")
 
-    # Accept input from user
-    query = st.text_input("Enter a question to ask your file:") 
-    
-    
+    else:
 
-    # Read Data as Pandas
-    data = pd.read_csv(file)
-
-    # Define pandas df agent - 0 ~ no creativity vs 1 ~ very creative
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.2),data,verbose=True) 
-    
-    # Define Generated and Past Chat Arrays
-    if 'generated' not in st.session_state: 
-        st.session_state['generated'] = []
-
-    if 'past' not in st.session_state: 
-        st.session_state['past'] = []
-
-    # CSS for chat bubbles
-    chat_text_style = \
-    """
-        .user-text {
-            color: blue;
-            text-align: right;
-            
-        }
+        # Accept input from user
+        query = st.text_input("Enter a question to ask your file:") 
         
-        .ai-text {
-            color: gray;
-            text-align: left;
-        }
-    """
+        
 
-    # Apply CSS style
-    st.write(f'<style>{chat_text_style}</style>', unsafe_allow_html=True)
+        # Read Data as Pandas
+        data = pd.read_csv(file)
 
+        # Define pandas df agent - 0 ~ no creativity vs 1 ~ very creative
+        agent = create_pandas_dataframe_agent(OpenAI(temperature=0.2),data,verbose=True) 
+        
+        # Define Generated and Past Chat Arrays
+        if 'generated' not in st.session_state: 
+            st.session_state['generated'] = []
 
-    # Execute Button Logic
-    if st.button("send") and query and openai_api_key:
-        with st.spinner('Generating response...'):
-            try:
-                answer = agent.run(query)
+        if 'past' not in st.session_state: 
+            st.session_state['past'] = []
 
-                # Store conversation
-                st.session_state.generated.append(answer)
-                st.session_state.past.append(query)
+        # CSS for chat 
+        chat_text_style = \
+        """
+            .user-text {
+                color: blue;
+                text-align: right;
                 
-                for i in range(len(st.session_state.past)):
-                    st.write(f'<div class="user-text">{st.session_state.past[i]}</div>', unsafe_allow_html=True)
-                    st.write(f'<div class="ai-text">{st.session_state.generated[i]}</div>', unsafe_allow_html=True)
-                    
-                    st.write("")
+            }
+            
+            .ai-text {
+                color: gray;
+                text-align: left;
+            }
+        """
 
-            except Exception as e:
-                st.error(f"An error occurred: {str(e)}")
+        # Apply CSS style
+        st.write(f'<style>{chat_text_style}</style>', unsafe_allow_html=True)
+
+
+        # Execute Button
+        if st.button("send") and query and openai_api_key:
+            with st.spinner('Generating response...'):
+                try:
+                    answer = agent.run(query)
+
+                    # Store conversation
+                    st.session_state.generated.append(answer)
+                    st.session_state.past.append(query)
+                    
+                    for i in range(len(st.session_state.past)):
+                        st.write(f'<div class="user-text">{st.session_state.past[i]}</div>', unsafe_allow_html=True)
+                        st.write(f'<div class="ai-text">{st.session_state.generated[i]}</div>', unsafe_allow_html=True)
+                        
+                        st.write("")
+
+                except Exception as e:
+                    st.error(f"An error occurred: {str(e)}")   
             
 
 def main():
