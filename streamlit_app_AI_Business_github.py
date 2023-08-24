@@ -344,7 +344,7 @@ def main_gpt_chat_generator():
 
 
     # Execute Button Logic
-    if st.button("send") and query and openai_api_key::
+    if st.button("send") and query and openai_api_key:
         with st.spinner('Generating response...'):
             try:
                 answer = agent.run(query)
