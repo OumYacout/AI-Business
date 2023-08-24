@@ -297,8 +297,6 @@ def main_gpt_BusinessAdvisory_generator():
 
             
 def main_gpt_chat_generator():
-
-  openai.api_key = openai_api_key
   if openai_api_key=="":
                 st.warning("You do not provide an API key. Please enter your openai key")
 
