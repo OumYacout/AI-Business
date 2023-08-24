@@ -14,10 +14,10 @@ from langchain.agents import create_pandas_dataframe_agent
 
 
 
-##github_token = st.secrets.github_token
-##repo_owner = st.secrets.repo_owner
-##repo_name = st.secrets.repo_name
-##file_path = st.secrets.file_path
+github_token = st.secrets.github_token
+repo_owner = st.secrets.repo_owner
+repo_name = st.secrets.repo_name
+file_path = st.secrets.file_path
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
